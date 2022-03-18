@@ -2,90 +2,93 @@
 #include <iostream>
 
 std::vector<int> snail(const std::vector<std::vector<int>>& snail_map) {
-    bool run = true;
+    if (snail_map[0].empty()) { return {}; }
+    std::vector<int> result;
     int i = 0; int j = 0;
     int arrSize = snail_map.size();
     int right = arrSize -1;
     int down = arrSize -1;
     int left = 0;
     int up = 1;
-    int posJ = snail_map.size();
-    int posI = snail_map.size();
+    int count = 1;
     int lastVal = arrSize * arrSize;
-    while (run)
+    while (true)
     {
+        if (count == lastVal)
+        {
+            result.push_back(snail_map[i][j]);
+            return result;
+        }
+        //Snail goes right
         while (j < right)
         {
-            if (snail_map[i][j] != lastVal) {
-                std::cout << snail_map[i][j];
+            if (count != lastVal) {
+                result.push_back(snail_map[i][j]);
+                count++;
                 j++;
-            } else {
-                std::cout << snail_map[i][j];
-                run = false; break;
             }
         }
+        //Snail goes down
         while (i < down)
         {
-            if (snail_map[i][j] != lastVal) {
-                std::cout << snail_map[i][j];
+            if (count != lastVal) {
+                result.push_back(snail_map[i][j]);
+                count++;
                 i++;
-            } else {
-                std::cout << snail_map[i][j];
-                run = false; break;
             }
         }
+        //Snail goes left
         while (j > left)
         {
-            if (snail_map[i][j] != lastVal) {
-                std::cout << snail_map[i][j];
+            if (count != lastVal) {
+                result.push_back(snail_map[i][j]);
+                count++;
                 j--;
-            } else {
-                std::cout << snail_map[i][j];
-                run = false; break;
             }
-
         }
+        //Snail goes up
         while (i > up)
         {
-            if (snail_map[i][j] != lastVal) {
-                std::cout << snail_map[i][j];
+            if (count != lastVal) {
+                result.push_back(snail_map[i][j]);
+                count++;
                 i--;
-            } else {
-                std::cout << snail_map[i][j];
-                run = false; break;
             }
         }
         right -= 1;
         down -= 1;
-        left -= 1;
-        up -= 1;
+        left += 1;
+        up += 1;
     }
-    
-    return {};
 }
 
 int main()
 {
     std::vector<std::vector<int>> v;
     std::vector<int> expected;
+    std::vector<int> result;;
 
-    //v = { {} };
-    //expected = {};
-    //snail(v);
+    v = { {758, 881, 89, 39, 164, 862, 406, 465, 995} , {83, 126, 696, 428, 477, 870, 861, 984, 96} , {483, 749, 699, 832, 967, 688, 329, 69, 451} , {7, 790, 494, 572, 734, 360, 623, 527, 253} , {656, 211, 256, 631, 714, 103, 124, 604, 532} , {102, 129, 579, 461, 333, 687, 181, 97, 499} , {290, 523, 46, 709, 790, 14, 179, 509, 10} , {838, 427, 853, 529, 896, 85, 327, 857, 336} , {829, 218, 481, 860, 205, 942, 820, 132, 311} };
+    result = snail(v);
+    expected = { 1,2,3,4,5,6,7,8,9 };
 
-    //v = { {1} };
-    //expected = { 1 };
-    //snail(v);
+    v = { {} };
+    result = snail(v);
+    expected = {};
 
-    //v = { {1,2}, {4,3} };
-    //expected = { 1,2,3,4 };
-    //snail(v);
+    v = { {1} };
+    result = snail(v);
+    expected = { 1 };
+
+    v = { {1,2}, {4,3} };
+    result = snail(v);
+    expected = { 1,2,3,4 };
 
     v = { {1,2,3}, {8,9,4}, {7,6,5} };
+    result = snail(v);
     expected = { 1,2,3,4,5,6,7,8,9 };
-    snail(v);
 
     v = { {1,2,3,4}, {12,13,14,5}, {11,16,15,6}, {10,9,8,7} };
+    result = snail(v);
     expected = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 };
-    snail(v);
 }
