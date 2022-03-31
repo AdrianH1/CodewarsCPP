@@ -1,115 +1,27 @@
 #include <string>
 #include <iostream>
-#include <math.h>
 
 class RomanHelper {
 public:
     std::string to_roman(unsigned int n) {
+        std::string roman[4][10] = {
+            { "", "M", "MM", "MMM", "MMMM" , "", "", "", "", ""},
+            { "", "C", "CC", "CCC", "CD" ,"D" , "DC", "DCC", "DCCC", "CM" },
+            { "", "X", "XX", "XXX", "XL" ,"L" , "LX", "LXX", "LXXX", "XC" },
+            { "", "I", "II", "III", "IV" ,"V" , "VI", "VII", "VIII", "IX" }
+        };
         std::string result;
-        int mod = std::pow(10, std::to_string(n).length()-1);
+        int mod = 1000;
         int val = 0;
+        int pos = 0;
         while (n > 0)
         {
             val = n / mod;
-            switch (mod)
-            {
-            case 1000:
-                for (int i = 0; i < val; i++)
-                    result.push_back('M'); break;
-            case 100:
-                if (val == 5)
-                {
-                    result.push_back('D');
-                    break;
-                }
-                else if (val == 9)
-                {
-                    result.push_back('C');
-                    result.push_back('M');
-                    break;
-                }
-                else if (val > 5 && val != 9)
-                {
-                    result.push_back('D');
-                    for (int i = 0; i < val-5; i++)
-                        result.push_back('C');
-                    break;
-                }
-                else if (val < 5)
-                {
-                    for (int i = 0; i < val; i++)
-                        result.push_back('C');
-                    break;
-                }
-            case 10:
-                if (val == 5)
-                {
-                    result.push_back('L');
-                    break;
-                }
-                else if (val == 9)
-                {
-                    result.push_back('X');
-                    result.push_back('C');
-                    break;
-                }
-                else if (val > 5 && val != 9)
-                {
-                    result.push_back('L');
-                    for (int i = 0; i < val - 5; i++)
-                        result.push_back('X');
-                    break;
-                }
-                else if (val == 4)
-                {
-                    for (int i = 0; i < val; i++)
-                        result.push_back('X');
-                        result.push_back('L');
-                    break;
-                }
-                else if (val < 4)
-                {
-                    for (int i = 0; i < val; i++)
-                        result.push_back('X');
-                    break;
-                }
-            case 1:
-                if (val == 5)
-                {
-                    result.push_back('V');
-                    break;
-                }
-                else if (val == 9)
-                {
-                    result.push_back('I');
-                    result.push_back('X');
-                    break;
-                }
-                else if (val > 5 && val != 9)
-                {
-                    result.push_back('V');
-                    for (int i = 0; i < val - 5; i++)
-                        result.push_back('I');
-                    break;
-                }
-                else if (val == 4)
-                {
-                    result.push_back('I');
-                    result.push_back('V');
-                    break;
-                }
-                else if (val < 4)
-                {
-                    for (int i = 0; i < val; i++)
-                        result.push_back('I');
-                    break;
-                }
-            default:
-                break;
-            }
+            if (val != 0)
+                result.append(roman[pos][val]);
             n = n % mod;
             mod = mod / 10;
-
+            pos++;
         }
         return result;
     }
