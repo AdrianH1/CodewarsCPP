@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <map>
 
 class RomanHelper {
 public:
@@ -26,7 +27,24 @@ public:
         return result;
     }
     int from_roman(std::string rn) {
-        return 0;
+        std::map<char, int> roman;
+        roman.insert({ 'I', 1 });
+        roman.insert({ 'V', 5 });
+        roman.insert({ 'X', 10 });
+        roman.insert({ 'L', 50 });
+        roman.insert({ 'C', 100 });
+        roman.insert({ 'D', 500 });
+        roman.insert({ 'M', 1000 });
+        int size = rn.size();
+        int result = 0;
+        for (int i = 0; i < size; i++)
+        {
+            if (roman[rn[i]] >= roman[rn[i + 1]])
+                result += roman[rn[i]];
+            else
+                result -= roman[rn[i]];
+        }
+        return result;
     }
 } RomanNumerals;
 
@@ -41,35 +59,13 @@ int main()
     RomanNumerals.to_roman(2008); // Equals("MMVIII"));
     RomanNumerals.to_roman(3999); // Equals("MMMCMXCIX"
 
+    RomanNumerals.from_roman("MCMXC"); // Equals(1990));
     RomanNumerals.from_roman("XXI"); // Equals(21));
+    RomanNumerals.from_roman("XIX"); // Equals(19));
     RomanNumerals.from_roman("I"); // Equals(1));
     RomanNumerals.from_roman("IX"); // Equals(9));
     RomanNumerals.from_roman("IV"); // Equals(4));
     RomanNumerals.from_roman("MMVIII"); // Equals(2008));
     RomanNumerals.from_roman("MDCLXVI"); // Equals(1666));
 
-    int i = 1234;
-    int mod = std::pow(10, std::to_string(i).length() - 1);
-    int j = i % 1000;
-    std::cout << j << ", ";
-    j = i / 1000;
-    std::cout << j << std::endl;
-
-    i = i % 1000;
-    j = i % 100;
-    std::cout << j << ", ";
-    j = i / 100;
-    std::cout << j << std::endl;
-
-    i = i % 100;
-    j = i % 10;
-    std::cout << j << ", ";
-    j = i / 10;
-    std::cout << j << std::endl;
-
-    i = i % 10;
-    j = i % 1;
-    std::cout << j << ", ";
-    j = i / 1;
-    std::cout << j << std::endl;
 }
