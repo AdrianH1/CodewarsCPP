@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{84aafb99-e3cc-40c9-a295-9756a3e4352d}</ProjectGuid>
-    <RootNamespace>ReverseOrderArray</RootNamespace>
+    <ProjectGuid>{75a1ea2b-d8c5-4ae5-8462-fc7c94ff4715}</ProjectGuid>
+    <RootNamespace>RomanNumeralsHelper</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
