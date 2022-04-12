@@ -1,0 +1,240 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+std::string who_is_winner(std::vector<std::string> pieces_position_list)
+{
+    bool winner = false;
+    int round = 0;
+    int column;
+    char player;
+    const int COLUMNS = 7;
+    const int ROWS = 6;
+    char gameboard[COLUMNS][ROWS] = {0};
+    //gameboard[0][5] = 'A'; // column 0 , row 5
+
+    while (!winner)
+    {
+	    // Split Command String
+        column = pieces_position_list.at(round)[0] - 65;
+        pieces_position_list.at(round)[2] == 'R' ? player = 'R' : player = 'Y';
+
+        //Drop Piece
+        for (int i = ROWS-1; i >= 0; i--)
+        {
+            if (gameboard[column][i] == 0)
+            {
+                gameboard[column][i] = player;
+                break;
+            }
+        }
+
+        //Check Winner
+        //Check rows
+        for (int i = 0; i < ROWS; i++)
+        {
+            int countR = 0;
+            int countY = 0;
+            for (int j = 0; j < COLUMNS; j++)
+            {
+                if (gameboard[j][i] == 'R')
+                {
+                    countR++;
+                    if (countR == 4)
+                        return "Red";
+                    countY = 0;
+                }
+                else if (gameboard[j][i] == 'Y')
+                {
+                    countY++;
+                    if (countY == 4)
+                        return "Yellow";
+                    countR = 0;
+                }
+            }
+        }
+
+        //Check columns
+        for (int i = 0; i < COLUMNS; i++)
+        {
+            int countR = 0;
+            int countY = 0;
+            for (int j = 0; j < ROWS; j++)
+            {
+                if (gameboard[i][j] == 'R')
+                {
+                    countR++;
+                    if (countR == 4)
+                        return "Red";
+                    countY = 0;
+                }
+                else if (gameboard[i][j] == 'Y')
+                {
+                    countY++;
+                    if (countY == 4)
+                        return "Yellow";
+                    countR = 0;
+                }
+            }
+        }
+
+        //Check diagonal left-to-right
+        int startC = 0;
+        int startR = 3;
+        int diag = 0;
+        while (diag < 6)
+        {
+            int col = startC;
+            int row = startR;
+            int countR = 0;
+            int countY = 0;
+            while (row >= 0)
+            {
+                if (gameboard[col][row] == 'R')
+                {
+                    countR++;
+                    if (countR == 4)
+                        return "Red";
+                    countY = 0;
+                }
+                else if (gameboard[col][row] == 'Y')
+                {
+                    countY++;
+                    if (countY == 4)
+                        return "Yellow";
+                    countR = 0;
+                }
+                row--;
+                col++;
+            }
+
+            if (startR < 5)
+            {
+                startR++;
+            }
+            else if (startC < 3)
+            {
+                startC++;
+            }
+            else
+                break;
+        }
+
+        //check diagonal right-to-left
+        startC = 6;
+        startR = 3;
+        diag = 0;
+        while (diag < 6)
+        {
+            int col = startC;
+            int row = startR;
+            int countR = 0;
+            int countY = 0;
+            while (row >= 0)
+            {
+                if (gameboard[col][row] == 'R')
+                {
+                    countR++;
+                    if (countR == 4)
+                        return "Red";
+                    countY = 0;
+                }
+                else if (gameboard[col][row] == 'Y')
+                {
+                    countY++;
+                    if (countY == 4)
+                        return "Yellow";
+                    countR = 0;
+                }
+                row--;
+                col--;
+            }
+
+            if (startR < 5)
+            {
+                startR++;
+            }
+            else if (startC > 3)
+            {
+                startC--;
+            }
+            else
+                break;
+        }
+
+        round++;
+    }
+    return "";
+}
+
+
+int main()
+{
+
+    who_is_winner({
+                "A_Red",
+                "B_Yellow",
+                "A_Red",
+                "B_Yellow",
+                "A_Red",
+                "B_Yellow",
+                "G_Red",
+                "B_Yellow"
+        }); //, Equals("Red"));
+
+    //who_is_winner({
+    //    "A_Red",
+    //    "A_Yellow",
+    //    "A_Red",
+    //    "B_Red",
+    //    "B_Red",
+    //    "B_Yellow",
+    //    "B_Red",
+    //    "C_Yellow",
+    //    "C_Red",
+    //    "C_Red",
+    //    "C_Yellow",
+    //    "C_Red",
+    //    "D_Red",
+    //    "D_Red",
+    //    "D_Yellow",
+    //    "D_Red",
+    //    "D_Red",
+    //    "D_Red"
+    //    }); //, Equals("Red"));
+
+    //who_is_winner({
+    //"A_Red",
+    //"A_Red",
+    //"A_Red",
+    //"A_Red"
+    //    }); //, Equals("Red"));
+
+    //who_is_winner({
+    //"A_Red",
+    //"B_Red",
+    //"C_Yellow",
+    //"D_Red",
+    //"E_Yellow",
+    //"F_Red",
+    //"G_Red",
+    //"A_Red",
+    //"B_Red",
+    //"C_Red",
+    //"D_Red",
+    //"E_Yellow",
+    //"F_Red",
+    //"G_Red"
+    //    }); //, Equals("Red"));
+
+    //who_is_winner({
+    //    "A_Red",
+    //    "B_Yellow",
+    //    "A_Red",
+    //    "B_Yellow",
+    //    "A_Red",
+    //    "B_Yellow",
+    //    "G_Red",
+    //    "B_Yellow"
+    //    }); //, Equals("Yellow"));
+}
