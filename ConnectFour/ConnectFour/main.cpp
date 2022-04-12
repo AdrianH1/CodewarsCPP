@@ -171,16 +171,16 @@ std::string who_is_winner(std::vector<std::string> pieces_position_list)
 int main()
 {
 
-    who_is_winner({
-                "A_Red",
-                "B_Yellow",
-                "A_Red",
-                "B_Yellow",
-                "A_Red",
-                "B_Yellow",
-                "G_Red",
-                "B_Yellow"
-        }); //, Equals("Red"));
+    //who_is_winner({
+    //            "A_Red",
+    //            "B_Yellow",
+    //            "A_Red",
+    //            "B_Yellow",
+    //            "A_Red",
+    //            "B_Yellow",
+    //            "G_Red",
+    //            "B_Yellow"
+    //    }); //, Equals("Red"));
 
     //who_is_winner({
     //    "A_Red",
@@ -237,4 +237,49 @@ int main()
     //    "G_Red",
     //    "B_Yellow"
     //    }); //, Equals("Yellow"));
+
+    Assert::That(who_is_winner({
+        "C_Yellow",
+        "B_Red",
+        "B_Yellow",
+        "E_Red",
+        "D_Yellow",
+        "G_Red",
+        "B_Yellow",
+        "G_Red",
+        "E_Yellow",
+        "A_Red",
+        "G_Yellow",
+        "C_Red",
+        "A_Yellow",
+        "A_Red",
+        "D_Yellow",
+        "B_Red",
+        "G_Yellow",
+        "A_Red",
+        "F_Yellow",
+        "B_Red",
+        "D_Yellow",
+        "A_Red",
+        "F_Yellow",
+        "F_Red",
+        "B_Yellow",
+        "F_Red",
+        "F_Yellow",
+        "G_Red",
+        "A_Yellow",
+        "F_Red",
+        "C_Yellow",
+        "C_Red",
+        "G_Yellow",
+        "C_Red",
+        "D_Yellow",
+        "D_Red",
+        "E_Yellow",
+        "D_Red",
+        "E_Yellow",
+        "C_Red",
+        "E_Yellow",
+        "E_Red"
+        }), Equals("Yellow"));
 }
