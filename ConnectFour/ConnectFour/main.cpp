@@ -12,7 +12,6 @@ std::string who_is_winner(std::vector<std::string> pieces_position_list)
     const int ROWS = 6;
     char gameboard[COLUMNS][ROWS];
     std::fill(gameboard[0], gameboard[0] + COLUMNS * ROWS, '0');
-    //gameboard[0][5] = 'A'; // column 0 , row 5
 
     while (!winner)
     {
@@ -30,8 +29,7 @@ std::string who_is_winner(std::vector<std::string> pieces_position_list)
             }
         }
 
-        //Check Winner
-        //Check rows
+        //Check Winner rows
         for (int i = 0; i < ROWS; i++)
         {
             int countR = 0;
@@ -60,7 +58,7 @@ std::string who_is_winner(std::vector<std::string> pieces_position_list)
             }
         }
 
-        //Check columns
+        //Check Winner columns
         for (int i = 0; i < COLUMNS; i++)
         {
             int countR = 0;
@@ -89,7 +87,7 @@ std::string who_is_winner(std::vector<std::string> pieces_position_list)
             }
         }
 
-        //Check diagonal left-to-right
+        //Check Winner diagonal left-to-right
         int startC = 0;
         int startR = 3;
         int diag = 0;
@@ -136,7 +134,7 @@ std::string who_is_winner(std::vector<std::string> pieces_position_list)
                 break;
         }
 
-        //check diagonal right-to-left
+        //check Winner diagonal right-to-left
         startC = 6;
         startR = 3;
         diag = 0;
@@ -184,6 +182,8 @@ std::string who_is_winner(std::vector<std::string> pieces_position_list)
         }
 
         round++;
+        if (round == 42 || round == pieces_position_list.size())
+            return "Draw";
     }
     return "";
 }
@@ -192,16 +192,26 @@ std::string who_is_winner(std::vector<std::string> pieces_position_list)
 int main()
 {
 
-    //who_is_winner({
-    //            "A_Red",
-    //            "B_Yellow",
-    //            "A_Red",
-    //            "B_Yellow",
-    //            "A_Red",
-    //            "B_Yellow",
-    //            "G_Red",
-    //            "B_Yellow"
-    //    }); //, Equals("Red"));
+    who_is_winner({
+        "E_Yellow",
+        "E_Red",
+        "B_Yellow",
+        "A_Red",
+        "A_Yellow",
+        "B_Red",
+        "F_Yellow",
+        "D_Red",
+        "F_Yellow",
+        "G_Red",
+        "G_Yellow",
+        "F_Red",
+        "F_Yellow",
+        "G_Red",
+        "D_Yellow",
+        "F_Red",
+        "F_Yellow",
+        "C_Red"
+        }); //, Equals("Red"));
 
     //who_is_winner({
     //    "A_Red",
